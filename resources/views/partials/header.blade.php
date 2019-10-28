@@ -24,19 +24,19 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ route('product.getShoppingCart') }}"><i class="fa fa-shopping-cart"></i>
+        <li><a href="#"><i class="fa fa-shopping-cart"></i>
         Shopping cart <span class="badge"> {{ Session::has('cart')?Session::get('cart')->totalQty:'' }} </span>
       </a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Manage User <span class="caret"></span></a>
           <ul class="dropdown-menu">
             @if(Auth::check())
-            <li><a href="{{ route('user.profile')}}"> Profile </a></li>
+            <li><a href="#"> Profile </a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="{{ route('user.logout') }}"> Log Out </a></li>
+            <li><a href="#"> Log Out </a></li>
             @else
-            <li><a href="{{ route('user.signup') }}"> Sign Up </a></li>
-            <li><a href="{{ route('user.signin' )}}"> Sign In </a></li>
+            <li><a href="#"> Sign Up </a></li>
+            <li><a href="#"> Sign In </a></li>
             @endif
           </ul>
         </li>

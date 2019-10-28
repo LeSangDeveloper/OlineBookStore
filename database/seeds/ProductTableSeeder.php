@@ -15,7 +15,7 @@ class ProductTableSeeder extends Seeder
         //
         $product = new Product([
         	'title' => 'Harry Potter',
-        	'imagePath' => '...',
+        	'imagePath' => 'public/src/images/th.jpg',
         	'description' => 'A best fiction novel of J.K Rowling',
         	'inStock' => 10,
         	'price' => 25.12,
