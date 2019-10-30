@@ -35,7 +35,7 @@
             <li role="separator" class="divider"></li>
             <li><a href="#"> Log Out </a></li>
             @else
-            <li><a href="#"> Sign Up </a></li>
+            <li><a href="{{route('user.signup')}}"> Sign Up </a></li>
             <li><a href="#"> Sign In </a></li>
             @endif
           </ul>
