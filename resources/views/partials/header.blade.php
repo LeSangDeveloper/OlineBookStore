@@ -36,7 +36,7 @@
             <li><a href="#"> Log Out </a></li>
             @else
             <li><a href="{{route('user.signup')}}"> Sign Up </a></li>
-            <li><a href="#"> Sign In </a></li>
+            <li><a href="{{route('user.signin')}}"> Sign In </a></li>
             @endif
           </ul>
         </li>
