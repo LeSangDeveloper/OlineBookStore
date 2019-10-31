@@ -13,16 +13,6 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#"> Link <span class="sr-only">(current)</span></a></li>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><i class="fa fa-shopping-cart"></i>
         Shopping cart <span class="badge"> {{ Session::has('cart')?Session::get('cart')->totalQty:'' }} </span>
@@ -33,7 +23,7 @@
             @if(Auth::check())
             <li><a href="#"> Profile </a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#"> Log Out </a></li>
+            <li><a href="{{route('user.logout')}}"> Log Out </a></li>
             @else
             <li><a href="{{route('user.signup')}}"> Sign Up </a></li>
             <li><a href="{{route('user.signin')}}"> Sign In </a></li>

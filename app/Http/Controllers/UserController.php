@@ -67,4 +67,10 @@ class UserController extends Controller
     	return redirect()->route('product.index');
     }
 
+    public function getLogout()
+    {
+        Auth::logout();
+        return redirect()->back();
+    }
+
 }

@@ -20,24 +20,37 @@ Route::get('/', [
 
 Route::group(['prefix'	=>	'user'], function() {
 
-Route::get('/signup', [
-	'uses' => 'UserController@getSignup',
-	'as'	=> 'user.signup'
-]);
+Route::group(['middleware'	=>	'guest'], function(){
 
-Route::post('/signup', [
-	'uses'	=> 'UserController@postSignup',
-	'as'	=> 'user.signup'
-]);
+	Route::get('/signup', [
+		'uses' => 'UserController@getSignup',
+		'as'	=> 'user.signup'
+	]);
 
-Route::get('/signin', [
-	'uses'	=>	'UserController@getSignin',
-	'as'	=>	'user.signin'
-]);
+	Route::post('/signup', [
+		'uses'	=> 'UserController@postSignup',
+		'as'	=> 'user.signup'
+	]);
 
-Route::post('/signin', [
-	'uses'	=>	'UserController@postSignin',
-	'as'	=>	'user.signin'
-]);
+	Route::get('/signin', [
+		'uses'	=>	'UserController@getSignin',
+		'as'	=>	'user.signin'
+	]);
+
+	Route::post('/signin', [
+		'uses'	=>	'UserController@postSignin',
+		'as'	=>	'user.signin'
+	]);
+
+});
+
+Route::group(['middleware'	=>	'auth'], function(){
+
+	Route::get('/logout', [
+		'uses'	=>	'UserController@getLogout',
+		'as'	=>	'user.logout'
+	]);
+
+});
 
 });

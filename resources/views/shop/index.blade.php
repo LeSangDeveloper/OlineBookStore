@@ -28,6 +28,9 @@ shopping cart
           <div class="pull-left price"> {{$product->price}}$ </div>
           <a href="#" class="btn btn-success pull-right" role="button">Add to cart</a>
         </div>
+        <div class="clearfix">
+           <div class="pull-left price">In Stock: {{$product->inStock}} </div>
+        </div>
       </div>
     </div>
   </div>
