@@ -51,6 +51,10 @@ Route::group(['middleware'	=>	'auth'], function(){
 		'as'	=>	'user.logout'
 	]);
 
+	Route::get('/AddToCart/{id}', [
+		'uses'	=>	'ProductController@getAddToCart',
+		'as'	=>	'product.addtocart'
+	]);
 });
 
 });

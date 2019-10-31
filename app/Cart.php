@@ -10,7 +10,7 @@ class Cart
 
 	public function __construct($oldCart)
 	{
-		if ($oldCart != n)
+		if ($oldCart != null)
 		{
 			$this->items = $oldCart->items;
 			$this->totalQty = $oldCart->totalQty;
@@ -29,7 +29,7 @@ class Cart
 				$storedItem['Qty']++;
 				$this->item[$id] = $storedItem['item'];
 				$this->totalQty += $storedItem['Qty'];
-				$this->totalPrice += $totalPrice['price'];
+				$this->totalPrice += $storedItem['price'];
 
 	}
 }

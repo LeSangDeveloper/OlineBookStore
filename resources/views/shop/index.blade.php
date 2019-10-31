@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-shopping cart
+LS BookStore
 @endsection
 
 @section('content')
@@ -17,6 +17,7 @@ shopping cart
 @foreach($products->chunk(3) as $productChunk)
   <div class="row">
     @foreach($productChunk as $product)
+    
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <img src="{{$product->imagePath}}" alt="...">
@@ -26,7 +27,11 @@ shopping cart
         </p>
         <div class="clearfix">
           <div class="pull-left price"> {{$product->price}}$ </div>
-          <a href="#" class="btn btn-success pull-right" role="button">Add to cart</a>
+          @if($product->inStock > 0)
+          <a href="{{route('product.addtocart', ['id' => $product->id])}}" class="btn btn-success pull-right" role="button">Add to cart</a>
+          @else
+          <a href="#" class="btn btn-danger pull-right" role="button">Out of stock !</a>
+          @endif
         </div>
         <div class="clearfix">
            <div class="pull-left price">In Stock: {{$product->inStock}} </div>
@@ -34,6 +39,7 @@ shopping cart
       </div>
     </div>
   </div>
+
   @endforeach
 </div>
 @endforeach
