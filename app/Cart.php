@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\Product;
 
 class Cart
 {
@@ -39,23 +40,34 @@ class Cart
 
 	public function removeAll($id)
 	{
-		$this->totalQty -= $this->items[$id]['Qty'];
-		$this->totalPrice -= $this->items[$id]['price'] * $this->items[$id]['Qty'];
-		unset($this->items[$id]);
+		if($this->items[$id]['Qty'] > 0)
+		{
+			$this->totalQty -= $this->items[$id]['Qty'];
+			$this->totalPrice -= $this->items[$id]['price'] * $this->items[$id]['Qty'];
+		}	unset($this->items[$id]);
 	}
 
 	public function removeOne($id)
 	{
-		if ($this->items[$id]['Qty'] == 1)
+		if ($this->items[$id]['Qty'] > 0)
 		{
-			$this->totalQty -= 1;
-			$this->totalPrice -= $this->items[$id]['price'];
-			unset($this->items[$id]);
-		}
-		else
-		{
-			$this->totalQty -= 1;
-			$this->totalPrice -= $this->items[$id]['price'];
+			if ($this->items[$id]['Qty'] == 1)
+			{
+				$product = Product::find($id);
+				$this->totalQty -= 1;
+				$this->totalPrice -= $product->price;
+				unset($this->items[$id]);
+				if($this->totalQty == 0)
+				{
+					$this->totalPrice = 0.0;
+				}
+			}
+			else
+			{
+				$this->items[$id]['Qty'] -= 1;
+				$this->totalQty -= 1;
+				$this->totalPrice -= $this->items[$id]['price'];
+			}
 		}
 	}
 }

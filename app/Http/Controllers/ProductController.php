@@ -87,14 +87,12 @@ class ProductController extends Controller
         $cart->removeOne($id);
 
         Session()->put('cart', $cart);
-        if (!Session::has('cart'))
-            return view('user.shopping-cart');
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $totalPrice = $cart->totalPrice;
 
-        if($totalPrice == 0.0) Session::forget('cart');
+        if($totalPrice <= 0.0) Session::forget('cart');
         return view('user.shopping-cart', ['products' => $cart->items, 'totalPrice' => $totalPrice]);
     }
 
@@ -108,14 +106,12 @@ class ProductController extends Controller
         $cart->removeAll($id);
 
         Session()->put('cart', $cart);
-        if (!Session::has('cart'))
-            return view('user.shopping-cart');
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $totalPrice = $cart->totalPrice;
 
-        if($totalPrice == 0.0) Session::forget('cart');
+        if($totalPrice <= 0.0) Session::forget('cart');
         return view('user.shopping-cart', ['products' => $cart->items, 'totalPrice' => $totalPrice]);
     }
 }
