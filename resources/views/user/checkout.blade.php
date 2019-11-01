@@ -7,7 +7,7 @@ LS BookStore
 @section('content')
 <div class="row">
   <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
-    <form action="#" method="post" id="checkout-form">
+    <form action="{{route('product.checkout')}}" method="post" id="checkout-form">
     	<div class="row">
     		<div class="col-sx-12">
     			<div class="form-group">
