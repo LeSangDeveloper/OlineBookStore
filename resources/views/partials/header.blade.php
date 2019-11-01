@@ -14,11 +14,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><i class="fa fa-shopping-cart"></i>
+        <li><a href="{{route('product.shoppingcart')}}"><i class="fa fa-shopping-cart"></i>
         Shopping cart <span class="badge"> {{ Session::has('cart')?Session::get('cart')->totalQty:'' }} </span>
       </a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> Manage User <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users"></i> User <span class="caret"></span></a>
           <ul class="dropdown-menu">
             @if(Auth::check())
             <li><a href="#"> Profile </a></li>

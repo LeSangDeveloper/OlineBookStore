@@ -55,6 +55,11 @@ Route::group(['middleware'	=>	'auth'], function(){
 		'uses'	=>	'ProductController@getAddToCart',
 		'as'	=>	'product.addtocart'
 	]);
+
+	Route::get('/shoppingCart', [
+		'uses'	=> 'ProductController@getShoppingCart',
+		'as'	=>	'product.shoppingcart'
+	]);
 });
 
 });

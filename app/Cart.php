@@ -21,14 +21,14 @@ class Cart
 	public function add($item, $id)
 	{
 		$storedItem = ['Qty' => 0, 'price' => $item->price, 'item' => $item];
-		if ($this->items != null)
+		if ($this->items)
 				if(array_key_exists($id, $this->items))
 				{
-					$storedItem['item']  = $this->items[$id];
+					$storedItem  = $this->items[$id];
 				}
 				$storedItem['Qty']++;
-				$this->item[$id] = $storedItem['item'];
-				$this->totalQty += $storedItem['Qty'];
+				$this->items[$id] = $storedItem;
+				$this->totalQty += 1;
 				$this->totalPrice += $storedItem['price'];
 
 	}
