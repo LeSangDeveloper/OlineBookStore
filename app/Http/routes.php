@@ -60,6 +60,16 @@ Route::group(['middleware'	=>	'auth'], function(){
 		'uses'	=> 'ProductController@getShoppingCart',
 		'as'	=>	'product.shoppingcart'
 	]);
+
+	Route::get('/checkout', [
+		'uses'	=> 'ProductController@getCheckout',
+		'as'	=> 'product.checkout'
+	]);
+
+	Route::post('/checkout', [
+		'uses'	=> 'ProductController@postCheckout',
+		'as'	=>	'product.checkout'
+	]);
 });
 
 });

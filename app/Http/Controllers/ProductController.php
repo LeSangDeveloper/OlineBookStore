@@ -51,4 +51,14 @@ class ProductController extends Controller
         $totalPrice = $cart->totalPrice;
         return view('user.shopping-cart', ['products' => $cart->items, 'totalPrice' => $totalPrice]);
     }
+
+    public function getCheckout()
+    {
+        return view('user.checkout');
+    }
+
+    public function postCheckout()
+    {
+
+    }
 }
