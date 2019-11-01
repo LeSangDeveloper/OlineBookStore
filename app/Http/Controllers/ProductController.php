@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Auth;
+
 use Session;
 
 class ProductController extends Controller
@@ -59,6 +61,19 @@ class ProductController extends Controller
 
     public function postCheckout()
     {
-
+                if(!Session::has('cart'))
+        {
+            return view('shop.index');
+        }
+        
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        
+        
+        if(!Auth::check())
+            return redirect()->route('user.signin');    
+        
+        Session::forget('cart');
+        return redirect()->route('product.index')->with('success', 'Successfully purchased products!');
     }
 }
