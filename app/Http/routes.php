@@ -70,6 +70,15 @@ Route::group(['middleware'	=>	'auth'], function(){
 		'uses'	=> 'ProductController@postCheckout',
 		'as'	=>	'product.checkout'
 	]);
+	Route::get('/removeOne/{id}', [
+		'uses'	=>	'ProductController@getRemoveOne',
+		'as'	=>	'product.removeone'
+	]);
+
+	Route::get('/removeAll/{id}', [
+		'uses'	=>	'ProductController@getRemoveAll',
+		'as'	=>	'product.removeall'
+	]);
 });
 
 });

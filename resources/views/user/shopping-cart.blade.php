@@ -15,12 +15,10 @@ LS BookStore
                   <strong>{{ $product['item']['title'] }}</strong>
                   <span class="label label-success">{{ $product['price'] }}$</span>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                      Action<span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Remove 1</a></li>
-                      <li><a href="#">Remove all</a></li>
-                    </ul>
+                     <a href="{{route('product.removeall', ['id' => $product['id']])}}" type="button" class="btn btn-primary btn-xs">
+                      Remove all</a>
+                     <a href="{{route('product.removeone', ['id' => $product['id']])}}" type="button" class="btn btn-primary btn-xs">
+                      Remove 1</a>
                   </div>                
                 </li>
             @endforeach

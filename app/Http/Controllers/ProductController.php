@@ -76,4 +76,46 @@ class ProductController extends Controller
         Session::forget('cart');
         return redirect()->route('product.index')->with('success', 'Successfully purchased products!');
     }
+
+    public function getRemoveOne(Request $request, $id)
+    {
+        $oldCart = Session::has('cart')?Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $product = Product::find($id);
+        $product->inStock += 1;
+        $product->save();
+        $cart->removeOne($id);
+
+        Session()->put('cart', $cart);
+        if (!Session::has('cart'))
+            return view('user.shopping-cart');
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $totalPrice = $cart->totalPrice;
+
+        if($totalPrice == 0.0) Session::forget('cart');
+        return view('user.shopping-cart', ['products' => $cart->items, 'totalPrice' => $totalPrice]);
+    }
+
+    public function getRemoveAll(Request $request, $id)
+    {
+        $oldCart = Session::has('cart')?Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $product = Product::find($id);
+        $product->inStock += $cart->items[$id]['Qty'];
+        $product->save();
+        $cart->removeAll($id);
+
+        Session()->put('cart', $cart);
+        if (!Session::has('cart'))
+            return view('user.shopping-cart');
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $totalPrice = $cart->totalPrice;
+
+        if($totalPrice == 0.0) Session::forget('cart');
+        return view('user.shopping-cart', ['products' => $cart->items, 'totalPrice' => $totalPrice]);
+    }
 }
