@@ -16,7 +16,6 @@ Route::get('/', [
 	'as'	=> 'product.index'
 ]);
 
-
 Route::post('/search', [
 	'uses' => 'ProductController@postIndex',
 	'as'	=> 'search'
