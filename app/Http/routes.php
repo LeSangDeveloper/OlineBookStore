@@ -17,6 +17,10 @@ Route::get('/', [
 ]);
 
 
+Route::post('/search', [
+	'uses' => 'ProductController@postIndex',
+	'as'	=> 'search'
+]);
 
 Route::group(['prefix'	=>	'user'], function() {
 

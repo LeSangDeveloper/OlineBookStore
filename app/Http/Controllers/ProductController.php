@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use DB;
+
 use Auth;
 
 use Session;
@@ -24,6 +26,15 @@ class ProductController extends Controller
     	$products = Product::all();
     	return view('shop.index', ['products' => $products]);
  
+    }
+
+    public function postIndex(Request $request)
+    {   
+        $inp = $request->input('search');
+        $inp = '%'. $inp .'%';
+        $products = DB::table("products")->where('products.title', 'LIKE', $inp)->get();
+        Session::put('search', $products);
+        return view('shop.index', ['products' => $products, 'search' => true]);
     }
 
     public function getAddToCart(Request $request, $id)
