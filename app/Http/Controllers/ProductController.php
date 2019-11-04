@@ -37,20 +37,29 @@ class ProductController extends Controller
         return view('shop.index', ['products' => $products, 'search' => true]);
     }
 
-    public function getAddToCart(Request $request, $id)
+    public function postAddToCart(Request $request, $id)
     {
     	$product = Product::find($id);
-    	if ($product->inStock > 0)
-    	{
-    		$product->inStock -= 1;
-    		$oldCart = Session::has('cart')?Session::get('cart'):null;
+        $add = "add".$id;
+        $quantity = $request->input($add);
     	
-    		$cart = new Cart($oldCart);
-    		$cart->add($product, $product->id);
+        if ($product->inStock > 0 && $quantity  < $product->inStock)
+    	{
+    		$oldCart = Session::has('cart')?Session::get('cart'):null;
+            
+        
 
-    		$request->session()->put('cart', $cart);
-    		$product->save();
-    		return redirect()->route('product.index');
+            $cart = new Cart($oldCart);
+            $cart->add($product, $product->id, $quantity);
+
+            $product->inStock = $product->inStock - $quantity;
+
+            $request->session()->put('cart', $cart);
+
+            $product->save();    
+
+            $products = Product::all();
+            return view('shop.index', ['products' => $products, 'search' => false]);
 		}
 		else 
 			return redirect()->route('product.index');

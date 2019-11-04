@@ -27,9 +27,24 @@ shopping cart
         <h3>{{$product->title}}</h3>
         <p class="description">{{$product->description}}
         </p>
+       
         <div class="clearfix">
+            <div class="pull-left price">In Stock: {{$product->inStock}} </div>
+        </div>
+        <div class="clearfix">
+
           <div class="pull-left price"> {{$product->price}}$ </div>
-          <a href="{{ route('product.addtocart', ['id'=>$product->id]) }}" class="btn btn-success pull-right" role="button">Add to cart</a>
+          @if($product->inStock > 0)
+          <form action="{{route('product.addToCart', ['id'=>$product->id])}}" method="post">
+             <div class="form-group pull-right" style="max-width: 60px">
+              <input type="number" class="form-control" name="add{{$product->id}}" placeholder="Num">
+               <button type="submit" class="btn btn-success pull-right">Add to cart</button>
+              {{ csrf_field() }}
+              </div>
+          </form>
+          @else
+          <a href="#" class="btn btn-danger pull-right" role="button">Out of stock !</a>
+          @endif
         </div>
       </div>
     </div>
@@ -50,8 +65,17 @@ shopping cart
         <h3>{{$product->title}}</h3>
         <p class="description">{{$product->description}}
         </p>
+         <div class="clearfix">
+            <div class="pull-left price">In Stock: {{$product->inStock}} </div>
+        </div>
         <div class="clearfix">
+         
           <div class="pull-left price"> {{$product->price}}$ </div>
+          @if($product->inStock > 0)
+          <a href="{{route('product.addtocart', ['id' => $product->id])}}" class="btn btn-success pull-right" role="button">Add to cart</a>
+          @else
+          <a href="#" class="btn btn-danger pull-right" role="button">Out of stock !</a>
+          @endif
         </div>
       </div>
     </div>

@@ -11,13 +11,13 @@ LS BookStore
           <ul class="list-group">
             @foreach($products as $product)
                 <li class="list-group-item">
-                  <span class="badge">{{ $product['Qty'] }}</span>
+                  <span class="badge">{{ $product['item']['Qty'] }}</span>
                   <strong>{{ $product['item']['title'] }}</strong>
                   <span class="label label-success">{{ $product['price'] }}$</span>
                   <div class="btn-group">
-                     <a href="{{route('product.removeall', ['id' => $product['id']])}}" type="button" class="btn btn-primary btn-xs">
+                     <a href="{{route('product.removeall', ['id' => $product['item']['id']])}}" type="button" class="btn btn-primary btn-xs">
                       Remove all</a>
-                     <a href="{{route('product.removeone', ['id' => $product['id']])}}" type="button" class="btn btn-primary btn-xs">
+                     <a href="{{route('product.removeone', ['id' => $product['item']['id']])}}" type="button" class="btn btn-primary btn-xs">
                       Remove 1</a>
                   </div>                
                 </li>

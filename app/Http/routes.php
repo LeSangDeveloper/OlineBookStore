@@ -82,6 +82,11 @@ Route::group(['middleware'	=>	'auth'], function(){
 		'uses'	=>	'ProductController@getRemoveAll',
 		'as'	=>	'product.removeall'
 	]);
+
+	Route::post('/add-to-cart/{id}', [
+	'uses' => 'ProductController@postAddToCart',
+	'as'	=> 'product.addToCart'
+]);
 });
 
 });
