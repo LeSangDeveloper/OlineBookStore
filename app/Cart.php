@@ -22,7 +22,7 @@ class Cart
 	public function add($item, $id, $quantity)
 	{
 
-		$storedItem = ['Qty' => 0, 'price' => $item->price, 'item' => $item];
+		$storedItem = ['Qty' => 0, 'price' => $item->price, 'item' => $item, 'id' => $id];
 		if ($this->items)
 			if (array_key_exists($id, $this->items))
 			{
@@ -40,30 +40,33 @@ class Cart
 		if($this->items[$id]['Qty'] > 0)
 		{
 			$this->totalQty -= $this->items[$id]['Qty'];
-			$this->totalPrice -= $this->items[$id]['price'] * $this->items[$id]['Qty'];
-		}	unset($this->items[$id]);
+			$this->totalPrice -= $this->items[$id]['price'];
+			unset($this->items[$id]);
+		}	
 	}
 
 	public function removeOne($id)
 	{
 		if ($this->items[$id]['Qty'] > 0)
 		{
+			$product = Product::find($id);
 			if ($this->items[$id]['Qty'] == 1)
 			{
-				$product = Product::find($id);
-				$this->totalQty -= 1;
+				
+				$this->totalQty = $this->totalQty - 1;
 				$this->totalPrice -= $product->price;
 				unset($this->items[$id]);
-				if($this->totalQty == 0)
+				if($this->totalQty <= 0)
 				{
 					$this->totalPrice = 0.0;
 				}
 			}
 			else
 			{
-				$this->items[$id]['Qty'] -= 1;
-				$this->totalQty -= 1;
-				$this->totalPrice -= $this->items[$id]['price'];
+				$this->items[$id]['Qty'] = $this->items[$id]['Qty'] - 1;
+				$this->totalQty = $this->totalQty - 1;
+				$this->items[$id]['price'] = $this->items[$id]['price'] - $product->price;
+				$this->totalPrice = $this->totalPrice - $product->price;
 			}
 		}
 	}

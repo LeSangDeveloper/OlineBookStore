@@ -39,11 +39,11 @@ class ProductController extends Controller
 
     public function postAddToCart(Request $request, $id)
     {
-    	$product = Product::find($id);
+
         $add = "add".$id;
         $quantity = $request->input($add);
-    	
-        if ($product->inStock > 0 && $quantity  < $product->inStock)
+    	$product = Product::find($id);
+        if ($product->inStock > 0 && $quantity  <= $product->inStock)
     	{
     		$oldCart = Session::has('cart')?Session::get('cart'):null;
             
@@ -52,11 +52,11 @@ class ProductController extends Controller
             $cart = new Cart($oldCart);
             $cart->add($product, $product->id, $quantity);
 
-            $product->inStock = $product->inStock - $quantity;
+
 
             $request->session()->put('cart', $cart);
 
-            $product->save();    
+   
 
             $products = Product::all();
             return view('shop.index', ['products' => $products, 'search' => false]);
@@ -96,9 +96,22 @@ class ProductController extends Controller
         $order->name = $request->input('name-order');
         $order->address = $request->input('address');
 
+        foreach($cart->items as $item)
+        {
+            $product = Product::find($item['id']);
+            if ($product->inStock >= $item['Qty'])
+            {
+                $product->inStock = $product->inStock - $item['Qty'];
+                 
+            }
+            else
+                return redirect()->route('product.index')->with('success', 'Product Purchased failed! '. title . 'just have only'. $product->inStock .'in stock!');
+        }
+        
        if(!Auth::check())
             return redirect()->route('user.signin');    
         
+        $product->save();
         Auth::user()->orders()->save($order);
 
         Session::forget('cart');
@@ -110,8 +123,6 @@ class ProductController extends Controller
         $oldCart = Session::has('cart')?Session::get('cart'):null;
         $cart = new Cart($oldCart);
         $product = Product::find($id);
-        $product->inStock += 1;
-        $product->save();
         $cart->removeOne($id);
 
         Session()->put('cart', $cart);
@@ -129,8 +140,6 @@ class ProductController extends Controller
         $oldCart = Session::has('cart')?Session::get('cart'):null;
         $cart = new Cart($oldCart);
         $product = Product::find($id);
-        $product->inStock += $cart->items[$id]['Qty'];
-        $product->save();
         $cart->removeAll($id);
 
         Session()->put('cart', $cart);
@@ -140,6 +149,6 @@ class ProductController extends Controller
         $totalPrice = $cart->totalPrice;
 
         if($totalPrice <= 0.0) Session::forget('cart');
-        return view('user.shopping-cart', ['products' => $cart->items, 'totalPrice' => $totalPrice]);
+            return view('user.shopping-cart', ['products' => $cart->items, 'totalPrice' => $totalPrice]);
     }
 }

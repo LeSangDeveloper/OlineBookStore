@@ -21,6 +21,15 @@ Route::post('/search', [
 	'as'	=> 'search'
 ]);
 
+Route::group(['prefix' => 'admin'], function(){
+	Route::group(['middleware'	=>	'CheckAdmin'], function(){
+		Route::get('/', [	
+			'uses'	=>	'AdminController@getIndex',
+			'as'	=> 'admin.index'
+		]);
+	});
+});
+
 Route::group(['prefix'	=>	'user'], function() {
 
 Route::group(['middleware'	=>	'guest'], function(){

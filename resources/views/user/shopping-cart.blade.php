@@ -11,7 +11,7 @@ LS BookStore
           <ul class="list-group">
             @foreach($products as $product)
                 <li class="list-group-item">
-                  <span class="badge">{{ $product['item']['Qty'] }}</span>
+                  <span class="badge">{{ $product['Qty'] }}</span>
                   <strong>{{ $product['item']['title'] }}</strong>
                   <span class="label label-success">{{ $product['price'] }}$</span>
                   <div class="btn-group">
