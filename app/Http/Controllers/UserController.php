@@ -28,7 +28,7 @@ class UserController extends Controller
     {	
     	$this->validate($request, [
     		'email' => 'email|required',
-    		'password' => 'required|min:4'
+    		'password' => 'required|min:8'
     	]);
 
 
@@ -44,7 +44,7 @@ class UserController extends Controller
     {
 		$this->validate($request, [
     		'email'	=>	'email|required|unique:users',
-    		'password'	=>	'required|min:4'
+    		'password'	=>	'required|min:8'
     	]);
 
     	$user = new User([

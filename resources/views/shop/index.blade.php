@@ -24,7 +24,7 @@ shopping cart
     <div class="thumbnail">
       <img src="{{$product->imagePath}}" alt="...">
       <div class="caption">
-        <h3>{{$product->title}}</h3>
+        <h3>{{$product->title}} ({{$product->author}})</h3>
         <p class="description">{{$product->description}}
         </p>
        

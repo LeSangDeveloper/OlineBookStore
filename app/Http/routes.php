@@ -23,11 +23,21 @@ Route::post('/search', [
 
 Route::group(['prefix' => 'admin'], function(){
 	Route::group(['middleware'	=>	'CheckAdmin'], function(){
-		Route::get('/', [	
+		Route::get('/function', [	
 			'uses'	=>	'AdminController@getIndex',
 			'as'	=> 'admin.index'
 		]);
 	});
+
+	Route::get('addProduct', [
+			'uses'	=>	'AdminController@getAddProduct',
+			'as'	=>	'addproduct'
+	]);
+
+	Route::post('addProduct', [
+			'uses'	=>	'AdminController@postAddProduct',
+			'as'	=>	'addproduct'
+	]);
 });
 
 Route::group(['prefix'	=>	'user'], function() {
