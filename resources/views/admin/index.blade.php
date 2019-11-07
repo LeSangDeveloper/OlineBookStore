@@ -10,7 +10,7 @@
     <a href="{{route('addproduct')}}" type="button" class="btn btn-default"> Add Product </a>
   </div>
   <div class="btn-group" role="group">
-    <a href="" type="button" class="btn btn-default"> Update Product </a>
+     <a href="{{route('updateproduct')}}" type="button" class="btn btn-default"> Update Product </a>
   </div>
   <div class="btn-group" role="group">
     <a type="button" class="btn btn-default"> Customer </a>

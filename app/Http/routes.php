@@ -27,17 +27,34 @@ Route::group(['prefix' => 'admin'], function(){
 			'uses'	=>	'AdminController@getIndex',
 			'as'	=> 'admin.index'
 		]);
-	});
+	
 
-	Route::get('addProduct', [
+	Route::get('/addProduct', [
 			'uses'	=>	'AdminController@getAddProduct',
 			'as'	=>	'addproduct'
 	]);
 
-	Route::post('addProduct', [
+	Route::post('/addProduct', [
 			'uses'	=>	'AdminController@postAddProduct',
 			'as'	=>	'addproduct'
 	]);
+
+
+	Route::get('/update-Product', [
+			'uses'	=>	'AdminController@getUpdateProduct',
+			'as'	=>	'updateproduct'
+	]);
+
+	Route::post('/postupdateProduct', [
+			'uses'	=>	'AdminController@postUpdateProduct',
+			'as'	=>	'postupdateproduct'
+	]);
+
+	Route::get('updateProduct/{id}', [
+		'uses'	=>	'AdminController@getUpdateProductId',
+		'as'	=>	'product.updateproduct'
+	]);
+	});
 });
 
 Route::group(['prefix'	=>	'user'], function() {
