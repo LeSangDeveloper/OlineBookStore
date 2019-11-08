@@ -37,7 +37,7 @@ class AdminController extends Controller
 		Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( public_path('\src\images\\' . $filename));
 		Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'admin\public\src\images\\' . $filename);
 		Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'admin\updateProduct\public\src\images\\' . $filename);
-		
+		Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'user\add-to-cart\public\src\images\\' . $filename);
 		$product->save();
 		return view('admin.index');
 	}
