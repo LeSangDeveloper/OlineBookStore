@@ -29,7 +29,7 @@ LS BookStore
 		</div>
 		<div class="form-group">
 			<label for="password"> Password </label>
-			<input type="password" id="password" name="password"></input>
+			<input type="password" id="password" name="password" pattern="^[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,10}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters without '' and space " required></input>
 		</div>
 		<button type="submit" class="btn btn-primary"> Sign Up </button>
 		{{ csrf_field() }}
