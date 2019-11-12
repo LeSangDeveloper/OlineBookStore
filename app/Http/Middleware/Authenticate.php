@@ -21,6 +21,7 @@ class Authenticate
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
+                Session::put('oldURL', $request->url());
                 return redirect()->route('user.signin');
             }
         }

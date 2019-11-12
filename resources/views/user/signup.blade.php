@@ -21,17 +21,17 @@ LS BookStore
 	<form action="{{ route('user.signup') }}" method="post">
 		<div class="form-group">
 			<label for="name"> Name </label>
-			<input type="text" id="name" name="name"></input>
+			<input type="text" id="name" name="name" pattern="[a-zA-Z]+" title="Use your alphabet name" required></input>
 		</div>
 		<div class="form-group">
 			<label for="email"> E-mail </label>
-			<input type="text" id="email" name="email"></input>
+			<input type="text" id="email" name="email" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="abc@xyz.vnc" required></input>
 		</div>
 		<div class="form-group">
 			<label for="password"> Password </label>
-			<input type="password" id="password" name="password" pattern="^[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,10}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters without '' and space " required></input>
+			<input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!`~@#$%^&*()'\])(?!.*[\s]).{6,20}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters without '' and space " required></input>
 		</div>
-		<button type="submit" class="btn btn-primary"> Sign Up </button>
+		<button name="signup" type="submit" class="btn btn-primary"> Sign Up </button>
 		{{ csrf_field() }}
 	</form>
 </div>

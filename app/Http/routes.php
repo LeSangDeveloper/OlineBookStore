@@ -23,7 +23,7 @@ Route::post('/search', [
 
 Route::group(['prefix' => 'admin'], function(){
 	Route::group(['middleware'	=>	'CheckAdmin'], function(){
-		Route::get('/function', [	
+		Route::get('/index', [	
 			'uses'	=>	'AdminController@getIndex',
 			'as'	=> 'admin.index'
 		]);

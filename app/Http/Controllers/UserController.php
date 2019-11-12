@@ -31,11 +31,14 @@ class UserController extends Controller
     		'password' => 'required|min:8'
     	]);
 
-
-    if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
+        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
     	{
-
-    		return redirect()->route('product.index');
+       		if(Session::has('oldURL'))
+            {
+                $oldURL = Session::get('oldURL');
+                Session::forget('oldURL');
+                return redirect()->to($oldURL);
+            }
     	}
     	return redirect()->back();
     }
