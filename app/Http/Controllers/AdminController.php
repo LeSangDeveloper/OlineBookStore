@@ -24,7 +24,6 @@ class AdminController extends Controller
 
 	public function postAddProduct(Request $request)
 	{
-		$imageProduct = $request->file('imageProduct');
 		$order = DB::table('products')->max('id');
 		$product = new Product;
 		$product->title = $request->input('title');
@@ -32,12 +31,20 @@ class AdminController extends Controller
 		$product->description = $request->input('description');
 		$product->inStock = (int)$request->input('in-stock');
 		$product->price = (float)$request->input('price');
-		$filename = 'th' . $order . '.png';
-		$product->imagePath = "public/src/images/th" . $order . '.png';
-		Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( public_path('\src\images\\' . $filename));
-		Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'admin\public\src\images\\' . $filename);
-		Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'admin\updateProduct\public\src\images\\' . $filename);
-		Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'user\add-to-cart\public\src\images\\' . $filename);
+		if ($request->hasFile('imageProduct'))
+		{
+			$imageProduct = $request->file('imageProduct');
+			$filename = 'th' . $order . '.png';
+			$product->imagePath = "public/src/images/th" . $order . '.png';
+			Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( public_path('\src\images\\' . $filename));
+			Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'admin\public\src\images\\' . $filename);
+			Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'admin\updateProduct\public\src\images\\' . $filename);
+			Image::make($request->imageProduct->getRealPath())->resize(300, 300)->save( 'user\add-to-cart\public\src\images\\' . $filename);
+		}
+		else
+		{
+			$product->imagePath = "public/src/images/default.jpg";
+		}
 		$product->save();
 		return view('admin.index');
 	}

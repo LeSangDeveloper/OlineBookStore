@@ -16,19 +16,17 @@
         <p class="description">{{$product->description}}
         </p>
        
-        <div class="clearfix">
+          <div class="clearfix">
             <div class="pull-left price">In Stock: {{$product->inStock}} </div>
-        </div>
-        <div class="clearfix">
+          </div>
+          <div class="clearfix">
           <div class="pull-left price"> {{$product->price}}$ </div>
                <a href="{{route('product.updateproduct', ['id' => $product->id])}}" type="button" class="btn btn-success pull-right">Update this</a>
+          </div>
         </div>
-          </form>
         </div>
       </div>
+      @endforeach
     </div>
-  </div>
-  @endforeach
-</div>
 	@endforeach
 @endsection

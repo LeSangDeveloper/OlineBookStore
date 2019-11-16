@@ -30,7 +30,7 @@ LS BookStore
           <strong>total: {{$totalPrice}}$</strong>
         </div>
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <a href="{{route('product.checkout')}}" type="button" class="btn btn-primary btn-success">
+            <a href="{{route('product.checkout')}}" type="button" class="btn btn-primary btn-success" name="checkout">
                       Checkout</a>
         </div>
     </div>

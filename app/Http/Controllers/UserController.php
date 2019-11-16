@@ -31,6 +31,11 @@ class UserController extends Controller
     		'password' => 'required|min:8'
     	]);
 
+        if ($request->input('email') == "admin@lsbookstore.com")
+            Session::put('admin', true);
+        else
+            Session::put('admin', false);
+
         if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
     	{
        		if(Session::has('oldURL'))
@@ -73,6 +78,7 @@ class UserController extends Controller
     public function getLogout()
     {
         Auth::logout();
+        Session::put('admin', false);
         return redirect()->back();
     }
 

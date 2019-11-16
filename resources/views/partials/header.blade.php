@@ -29,6 +29,11 @@
           <ul class="dropdown-menu">
             @if(Auth::check())
             <li><a href="#"> Profile </a></li>
+            @if(Session::has('admin'))
+              @if(Session::get('admin'))
+               <li><a href="{{ route('admin.index') }}"> Admin </a></li> 
+              @endif
+            @endif
             <li role="separator" class="divider"></li>
             <li><a href="{{route('user.logout')}}"> Log Out </a></li>
             @else
