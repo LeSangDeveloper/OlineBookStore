@@ -20,7 +20,7 @@ shopping cart
     </div>
     <div class="form-group">
       <label for="in-stock"> In stock: </label>
-      <input type="number" id="in-stock" name="in-stock" required></input>
+      <input type="number" id="in-stock" name="in-stock" pattern="^(?=.*[0-9])(?!.*\s).*$" required></input>
     </div>
     <div class="form-group">
        <label for="description"> Description </label>

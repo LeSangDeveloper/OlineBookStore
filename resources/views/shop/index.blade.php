@@ -38,7 +38,7 @@ LS Bookstore
           <form action="{{route('product.addToCart', ['id'=>$product->id])}}" method="post">
              <div class="form-group pull-right" style="max-width: 60px">
               <input type="number" class="form-control" name="add{{$product->id}}" placeholder="Num" required>
-               <button type="submit" class="btn btn-success pull-right">Add to cart</button>
+               <button type="submit" class="btn btn-success pull-right" name="addtocart{{$product->id}}">Add to cart</button>
               {{ csrf_field() }}
               </div>
           </form>

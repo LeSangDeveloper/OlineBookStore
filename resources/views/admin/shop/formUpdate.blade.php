@@ -19,11 +19,11 @@
     </div>
     <div class="form-group">
       <label for="price"> Price </label>
-      <input type="text" id="price" name="price" placeholder="{{$product->price}}" pattern="[0-9]+(\.[0-9][0-9]?)"'></input>
+      <input type="text" id="price" name="price" placeholder="{{$product->price}}" pattern="[0-9]+(\.[0-9][0-9]?)"></input>
     </div>
     <div class="form-group">
       <label for="in-stock"> In stock: </label>
-      <input type="number" id="in-stock" name="in-stock" placeholder="{{$product->inStock}}"></input>
+      <input type="number" id="in-stock" minlength="1" name="in-stock" pattern="(?=.*[0-9])(?!.*\s)" placeholder="{{$product->inStock}}"></input>
     </div>
     <div class="form-group">
        <label for="description"> Description </label>
